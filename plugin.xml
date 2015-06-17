@@ -7,15 +7,18 @@
     <keywords>cordova,ibeacon,beacon,bluetooth,le</keywords>
     <repo>https://github.com/petermetz/cordova-plugin-ibeacon.git</repo>
 
+    <preference name="ALWAYS_USAGE_DESCRIPTION" value="This app would like to scan for iBeacons even when in the background." />
+    <preference name="WHEN_IN_USE_USAGE_DESCRIPTION" value="This app would like to scan for iBeacons while it is in use." />
+
     <!-- Third party libraries -->
     <js-module name="underscorejs" src="www/lib/underscore-min-1.6.js">
         <runs/>
     </js-module>
-  
+
     <js-module name="Q" src="www/lib/q.min.js">
         <runs/>
     </js-module>
-    
+
     <!-- Plugin source code: Core -->
     <js-module name="LocationManager" src="www/LocationManager.js">
         <!-- see http://cordova.apache.org/docs/en/3.0.0/plugin_ref_spec.md#Plugin%20Specification_js_module_element -->
@@ -46,20 +49,20 @@
 
 
     <platform name="ios">
-        
+
         <config-file parent="/*" target="config.xml">
             <feature name="LocationManager">
                 <param name="ios-package" value="CDVLocationManager"/>
             </feature>
         </config-file>
-        
+
         <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
-            <string>This app would like to scan for iBeacons even when in the background.</string>
+            <string>$ALWAYS_USAGE_DESCRIPTION</string>
         </config-file>
         <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-            <string>This app would like to scan for iBeacons while it is in use.</string>
+            <string>$WHEN_IN_USE_USAGE_DESCRIPTION</string>
         </config-file>
-         
+
 
         <header-file src="src/ios/CDVLocationManager.h"/>
         <source-file src="src/ios/CDVLocationManager.m"/>
@@ -111,7 +114,7 @@
                 </intent-filter>
             </service>
         </config-file>
-		
+
         <source-file src="src/android/LocationManager.java" target-dir="src/com/unarin/cordova/beacon" />
         <source-file src="src/android/IBeaconServiceNotifier.java" target-dir="src/com/unarin/cordova/beacon" />
         <source-file src="src/android/ILocationManagerCommand.java" target-dir="src/com/unarin/cordova/beacon" />
